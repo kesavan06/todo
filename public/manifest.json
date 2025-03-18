@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "ToDo",
+  "version": "1.0.0",
+  "description": "ToDo list",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": ["storage"],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
