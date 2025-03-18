@@ -8,6 +8,22 @@ export const Todo = () => {
   let taskName = useRef("");
   let [tasks, setTasks] = useState([]);
 
+  useEffect(() => {
+    chrome.storage.local.get(["tasks"], (result) => {
+      if (result.tasks) {
+        setTasks(result.tasks);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    chrome.storage.local.set({ tasks }, () => {
+      if (chrome.runtime.lastError) {
+        console.error("Error saving tasks:", chrome.runtime.lastError);
+      }
+    });
+  }, [tasks]);
+
   const addTask = () => {
     if (taskName.current.value.trim().length != 0) {
       let taskObject = { taskName: taskName.current.value, status: false };
